@@ -8,10 +8,10 @@
 
 author="RHWong"
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
-Info="${Green_font_prefix}[ÐÅÏ¢]${Font_color_suffix}"
-Error="${Red_font_prefix}[´íÎó]${Font_color_suffix}"
-Warrning="${Red_font_prefix}[¾¯¸æ]${Font_color_suffix}"
-Tip="${Green_font_prefix}[ÌáÊ¾]${Font_color_suffix}"
+Info="${Green_font_prefix}[ä¿¡æ¯]${Font_color_suffix}"
+Error="${Red_font_prefix}[é”™è¯¯]${Font_color_suffix}"
+Warrning="${Red_font_prefix}[è­¦å‘Š]${Font_color_suffix}"
+Tip="${Green_font_prefix}[æç¤º]${Font_color_suffix}"
 
 basepath=$(cd `dirname $0`; pwd)
 project_path=$basepath/dpserver
@@ -20,7 +20,7 @@ main_file=set-webadmin-password.sh
 $basepath
 $project_path
 $ret_code
-    # ¼ì²â±¾»úÄÚºË·¢ÐÐ°æ
+    # æ£€æµ‹æœ¬æœºå†…æ ¸å‘è¡Œç‰ˆ
     check_sys(){
         if [[ -f /etc/redhat-release ]]; then
             release="Centos"
@@ -36,10 +36,10 @@ $ret_code
             release="Ubuntu"
         elif cat /proc/version | grep -q -E -i "Centos|red hat|redhat"; then
             release="Centos"
-        # Èç¹ûÊÇtermux
+        # å¦‚æžœæ˜¯termux
         elif [ -f /data/data/com.termux/files/usr/bin/bash ]; then
             release="Termux"
-        # Èç¹ûÊÇÎ´ÖªÏµÍ³°æ±¾ÔòÊä³öunknown
+        # å¦‚æžœæ˜¯æœªçŸ¥ç³»ç»Ÿç‰ˆæœ¬åˆ™è¾“å‡ºunknown
         else
             release="unknown"
         fi
@@ -49,32 +49,32 @@ $ret_code
         if [[ ${bit} == "x86_64" ]]; then
             print_release_bit
         else
-            echo -e "${Warrning} ${project_name}¹Ù·½Î´·¢²¼${Red_font_prefix}[${bit}]${Font_color_suffix}·þÎñ¶Ë!"
-            echo -e "${Warrning} ÇëÄú¸ü»»x86_64ºóÖØÐÂ³¢ÊÔ¡£"
+            echo -e "${Warrning} ${project_name}å®˜æ–¹æœªå‘å¸ƒ${Red_font_prefix}[${bit}]${Font_color_suffix}æœåŠ¡ç«¯!"
+            echo -e "${Warrning} è¯·æ‚¨æ›´æ¢x86_64åŽé‡æ–°å°è¯•ã€‚"
 				sleep 3
                 exit 1
         fi
 
     }
-    # ´òÓ¡releaseºÍbit
-        # Èç¹ûÊÇCentosÔò·µ»Ø¾¯¸æ
+    # æ‰“å°releaseå’Œbit
+        # å¦‚æžœæ˜¯Centosåˆ™è¿”å›žè­¦å‘Š
     print_release_bit(){
-            echo -e "${Info} µ±Ç°ÏµÍ³Îª ${Green_font_prefix}[${release}]${Font_color_suffix} ${Green_font_prefix}[${bit}]${Font_color_suffix}"
+            echo -e "${Info} å½“å‰ç³»ç»Ÿä¸º ${Green_font_prefix}[${release}]${Font_color_suffix} ${Green_font_prefix}[${bit}]${Font_color_suffix}"
     }
 
-    # °²×°ÏîÄ¿
+    # å®‰è£…é¡¹ç›®
     install_project()
     {
-        # ÅÐ¶ÏÏîÄ¿Ä¿Â¼ÏÂÖ÷Òª³ÌÐòÊÇ·ñ´æÔÚ  
+        # åˆ¤æ–­é¡¹ç›®ç›®å½•ä¸‹ä¸»è¦ç¨‹åºæ˜¯å¦å­˜åœ¨  
     if [ ! -f "${project_path}/${main_file}" ]; then
-        echo -e "${Info} ${project_name}Ö÷ÎÄ¼þ²»´æÔÚ£¬¿ªÊ¼°²×°..."
+        echo -e "${Info} ${project_name}ä¸»æ–‡ä»¶ä¸å­˜åœ¨ï¼Œå¼€å§‹å®‰è£…..."
         sleep 1
-            echo -e "${Info} ÍøÂçÁ¬½ÓÒì³££¬¿ªÊ¼Ê¹ÓÃ¾µÏñÏÂÔØ${project_name}..."
+            echo -e "${Info} ç½‘ç»œè¿žæŽ¥å¼‚å¸¸ï¼Œå¼€å§‹ä½¿ç”¨é•œåƒä¸‹è½½${project_name}..."
             git clone https://mirror.ghproxy.com/https://github.com/drawpile/dpserver.git
-        echo -e "${Tip} ${project_name}ÏÂÔØÍê³É£¡"
+        echo -e "${Tip} ${project_name}ä¸‹è½½å®Œæˆï¼"
         sleep 1
     else
-        echo -e "${Info} ${project_name}ÎÄ¼þÒÑ´æÔÚ£¬ÎÞÐè°²×°£¡"
+        echo -e "${Info} ${project_name}æ–‡ä»¶å·²å­˜åœ¨ï¼Œæ— éœ€å®‰è£…ï¼"
         sleep 1
     fi
     }
@@ -113,7 +113,7 @@ END
 	mv ../dpwebadmin/build admin
 	}
 	
-   # ÉèÖÃ¹ÜÀíÔ±ÃÜÂë
+   # è®¾ç½®ç®¡ç†å‘˜å¯†ç 
 	set_webadmin_password()
 	{
 	PW_FILE=${project_path}/nginx-config/htpasswd	
@@ -124,23 +124,23 @@ END
         elif [[ ${release} == "Debian" ]]; then
             apt install -y apache2-utils
         elif [[ ${release} == "unknown" ]]; then
-            echo -e "${Warrning} Î´ÖªÏµÍ³°æ±¾£¬ÈôÎÞ·¨¼ÌÐøÔËÐÐÇë×ÔÐÐ°²×°apache2-utils»òhttpdÒÔ¼¤»îhtpasswd"
+            echo -e "${Warrning} æœªçŸ¥ç³»ç»Ÿç‰ˆæœ¬ï¼Œè‹¥æ— æ³•ç»§ç»­è¿è¡Œè¯·è‡ªè¡Œå®‰è£…apache2-utilsæˆ–httpdä»¥æ¿€æ´»htpasswd"
             sleep 3
         fi	
-	echo -e "ÇëÊäÈë Drawpile ·þÎñ¶ËÒªÉèÖÃµÄÃÜÂë[password]"
-	read -erp "(Ä¬ÈÏ: dpasswd):" password_dp
+	echo -e "è¯·è¾“å…¥ Drawpile æœåŠ¡ç«¯è¦è®¾ç½®çš„å¯†ç [password]"
+	read -erp "(é»˜è®¤: dpasswd):" password_dp
 	[[ -z "$password_dp" ]] && password_dp="dpasswd"
 	echo && echo "	================================================"
-	echo -e "	ÃÜÂë[password]: ${Red_background_prefix} ${password_dp} ${Font_color_suffix}"
+	echo -e "	å¯†ç [password]: ${Red_background_prefix} ${password_dp} ${Font_color_suffix}"
 	echo "	================================================" && echo
 	touch $PW_FILE
 	htpasswd -b $PW_FILE admin ${password_dp}
 	}
 	
 	set_server_host() {
-		echo -e "ÇëÊäÈë Drawpile ·þÎñ¶ËÖÐÍøÕ¾ÒªÉèÖÃµÄ ÓòÃû[domain]
-		ÀýÈçÊäÈë: drawpile.cn £¬Èç¹ûÒªÊ¹ÓÃ±¾»úIP£¬ÇëÁô¿ÕÖ±½Ó»Ø³µ"
-		read -erp "(Ä¬ÈÏ: ±¾»úIP):" server_s
+		echo -e "è¯·è¾“å…¥ Drawpile æœåŠ¡ç«¯ä¸­ç½‘ç«™è¦è®¾ç½®çš„ åŸŸå[domain]
+		ä¾‹å¦‚è¾“å…¥: drawpile.cn ï¼Œå¦‚æžœè¦ä½¿ç”¨æœ¬æœºIPï¼Œè¯·ç•™ç©ºç›´æŽ¥å›žè½¦"
+		read -erp "(é»˜è®¤: æœ¬æœºIP):" server_s
 		[[ -z "$server_s" ]] && server_s=""
 	cat > .env <<END
 DOMAIN=$server_s
@@ -151,7 +151,7 @@ END
 	}	
 
 
-    # ±¾µØ°²×°  
+    # æœ¬åœ°å®‰è£…  
     install_local(){
         check_sys
         anti_bit
@@ -161,36 +161,36 @@ END
 		set_webadmin_password
 		update_webadmin
         set_server_host
-        echo -e "${Tip} ${project_name}°²×°Íê³É£¡"
+        echo -e "${Tip} ${project_name}å®‰è£…å®Œæˆï¼"
         sleep 1
-        # ´òÓ¡°²×°Î»ÖÃ
-        echo -e "${Tip} ${project_name}°²×°Î»ÖÃ£º${project_path}"
+        # æ‰“å°å®‰è£…ä½ç½®
+        echo -e "${Tip} ${project_name}å®‰è£…ä½ç½®ï¼š${project_path}"
         sleep 3
-        echo -e "${Tip} ¿ªÊ¼³¢ÊÔÔËÐÐ£¬ÈçÓÐÎÊÌâÇëÌá½»issue"
+        echo -e "${Tip} å¼€å§‹å°è¯•è¿è¡Œï¼Œå¦‚æœ‰é—®é¢˜è¯·æäº¤issue"
         sleep 1
         cd ${project_path} && docker-compose up -d
     }
 
-    # ÐÞ¸ÄÃÜÂë
+    # ä¿®æ”¹å¯†ç 
     change_password(){
         check_sys
         anti_bit
         cd ${project_path}
 		set_webadmin_password
-        echo -e "${Tip} ${project_name}ÐÞ¸ÄÍê³É£¡"
+        echo -e "${Tip} ${project_name}ä¿®æ”¹å®Œæˆï¼"
         sleep 1
-        echo -e "${Tip} ¿ªÊ¼³¢ÊÔ¸üÐÂdocker£¬ÈçÓÐÎÊÌâÇëÌá½»issue"
+        echo -e "${Tip} å¼€å§‹å°è¯•æ›´æ–°dockerï¼Œå¦‚æœ‰é—®é¢˜è¯·æäº¤issue"
         sleep 1
         cd ${project_path} && docker-compose up -d
     }
 
 
-    # Æô¶¯ÏîÄ¿
+    # å¯åŠ¨é¡¹ç›®
     dp_srv_start(){
-        echo -e "${Info} ÄãÒª×öÊ²Ã´£¿"
-        echo -e "1. °²×°dp_srv"
-        echo -e "2. ÐÞ¸Ä¹ÜÀíÔ±ÃÜÂë"
-        read -p "ÇëÊäÈëÊý×Ö:" num
+        echo -e "${Info} ä½ è¦åšä»€ä¹ˆï¼Ÿ"
+        echo -e "1. å®‰è£…dp_srv"
+        echo -e "2. ä¿®æ”¹ç®¡ç†å‘˜å¯†ç "
+        read -p "è¯·è¾“å…¥æ•°å­—:" num
         case "$num" in
             1)
             install_local
@@ -199,7 +199,7 @@ END
             change_password
             ;;
             *)
-            echo -e "${Error} ÇëÊäÈëÕýÈ·µÄÊý×Ö"
+            echo -e "${Error} è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—"
             exit 1
             ;;
         esac
